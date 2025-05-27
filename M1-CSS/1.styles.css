@@ -1,0 +1,10 @@
+/* External stylesheet */
+
+/* Box styles */
+.external-box {
+  padding: 15px;
+  background-color: #ffefd5; /* Papaya whip */
+  border: 2px solid #ffa500; /* Orange border */
+  border-radius: 8px;
+  margin-top: 20px;
+}

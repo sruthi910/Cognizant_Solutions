@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event List - Community Portal</title>
+</head>
+<body>
+    <h1>Upcoming Events</h1>
+    <div id="events"></div>
+
+    <script>
+        // Sample list of events
+        const events = [
+            { name: "Tree Plantation", date: "2025-06-30", seats: 5 },
+            { name: "Blood Donation Camp", date: "2025-05-20", seats: 10 },
+            { name: "Beach Cleanup", date: "2025-06-01", seats: 0 },
+            { name: "Food Drive", date: "2025-07-05", seats: 3 }
+        ];
+
+        const eventsDiv = document.getElementById("events");
+        const today = new Date();
+
+        // Display only upcoming and non-full events
+        events.forEach((event, index) => {
+            const eventDate = new Date(event.date);
+
+            if (eventDate > today && event.seats > 0) {
+                const eventCard = document.createElement("div");
+                eventCard.innerHTML = `
+                    <h3>${event.name}</h3>
+                    <p>Date: ${event.date}</p>
+                    <p>Available Seats: <span id="seats-${index}">${event.seats}</span></p>
+                    <button onclick="register(${index})">Register</button>
+                    <hr>
+                `;
+                eventsDiv.appendChild(eventCard);
+            }
+        });
+
+        // Register function with try-catch for error handling
+        function register(index) {
+            try {
+                if (events[index].seats > 0) {
+                    events[index].seats--;
+                    document.getElementById(`seats-${index}`).innerText = events[index].seats;
+                    alert(`Registered for ${events[index].name}. Remaining seats: ${events[index].seats}`);
+                } else {
+                    throw new Error("No seats available");
+                }
+            } catch (err) {
+                alert("Error: " + err.message);
+            }
+        }
+    </script>
+</body>
+</html>

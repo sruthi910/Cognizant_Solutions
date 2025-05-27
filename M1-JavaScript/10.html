@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Modern JS Features - Community Portal</title>
+</head>
+<body>
+  <h1>Community Events</h1>
+  <div id="eventsContainer"></div>
+
+  <script>
+    // Original events list
+    const events = [
+      { name: "Music Night", category: "Music", seats: 5 },
+      { name: "Art Workshop", category: "Art", seats: 2 },
+      { name: "Tech Talk", category: "Education", seats: 0 }
+    ];
+
+    // Clone and filter events using spread operator and filter
+    const filterEventsByCategory = (eventList, category = "All") => {
+      const clonedList = [...eventList]; // spread operator to clone array
+      return category === "All"
+        ? clonedList
+        : clonedList.filter(({ category: cat }) => cat === category);
+    };
+
+    // Render function using destructuring and default parameters
+    const renderEvents = (eventList = []) => {
+      const container = document.getElementById("eventsContainer");
+      container.innerHTML = "";
+
+      eventList.forEach(({ name, category, seats }) => {
+        const card = document.createElement("div");
+        card.style.border = "1px solid #ccc";
+        card.style.margin = "10px";
+        card.style.padding = "10px";
+
+        card.innerHTML = `
+          <h3>${name}</h3>
+          <p>Category: ${category}</p>
+          <p>Seats: ${seats > 0 ? seats : "Sold Out"}</p>
+        `;
+
+        container.appendChild(card);
+      });
+    };
+
+    // Example usage:
+    // Filter by "Music" category and render
+    const filteredEvents = filterEventsByCategory(events, "Music");
+    renderEvents(filteredEvents);
+  </script>
+</body>
+</html>

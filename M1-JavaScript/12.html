@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <title>AJAX & Fetch API - Event Registration</title>
+  <style>
+    form {
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    .message {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    .success {
+      color: green;
+    }
+    .error {
+      color: red;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 6px;
+      margin-top: 4px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <h1>Register for an Event</h1>
+
+  <form id="registrationForm" novalidate>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required />
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required />
+
+    <label for="eventSelect">Select Event:</label>
+    <select id="eventSelect" name="eventSelect" required>
+      <option value="">-- Choose an event --</option>
+      <option value="Music Night">Music Night</option>
+      <option value="Art Workshop">Art Workshop</option>
+      <option value="Tech Talk">Tech Talk</option>
+    </select>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <div id="message" class="message"></div>
+
+  <script>
+    const form = document.getElementById("registrationForm");
+    const messageDiv = document.getElementById("message");
+
+    // Mock API endpoint simulation using fetch and setTimeout
+    function mockPost(url, data) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // Simulate 90% success rate
+          if (Math.random() < 0.9) {
+            resolve({ status: 200, message: "Registration successful" });
+          } else {
+            reject({ status: 500, message: "Server error, please try again" });
+          }
+        }, 2000); // 2 seconds delay
+      });
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      messageDiv.textContent = "";
+      messageDiv.className = "message";
+
+      const { name, email, eventSelect } = form.elements;
+
+      // Simple validation
+      if (!name.value.trim() || !email.value.trim() || !eventSelect.value) {
+        messageDiv.textContent = "Please fill in all fields.";
+        messageDiv.classList.add("error");
+        return;
+      }
+
+      const payload = {
+        name: name.value.trim(),
+        email: email.value.trim(),
+        event: eventSelect.value
+      };
+
+      messageDiv.textContent = "Submitting registration...";
+      messageDiv.classList.remove("error");
+      messageDiv.classList.remove("success");
+
+      try {
+        // Using fetch with POST
+        // Here, we call mockPost instead of real fetch for simulation
+        const response = await mockPost("https://mockapi.com/register", payload);
+
+        if (response.status === 200) {
+          messageDiv.textContent = response.message;
+          messageDiv.classList.add("success");
+          form.reset();
+        } else {
+          throw new Error(response.message);
+        }
+      } catch (error) {
+        messageDiv.textContent = error.message || "Failed to register.";
+        messageDiv.classList.add("error");
+      }
+    });
+  </script>
+</body>
+</html>

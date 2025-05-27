@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Details - Community Portal</title>
+</head>
+<body>
+    <h1>Event Registration</h1>
+    <p id="eventInfo"></p>
+    <button onclick="register()">Register</button>
+
+    <script>
+        // Declare event details
+        const eventName = "Community Clean-Up Drive";
+        const eventDate = "2025-06-15";
+        let availableSeats = 10;
+
+        // Display event info using template literals
+        document.getElementById("eventInfo").innerText = 
+            `Event: ${eventName}\nDate: ${eventDate}\nAvailable Seats: ${availableSeats}`;
+
+        // Function to register for the event
+        function register() {
+            if (availableSeats > 0) {
+                availableSeats--; // Decrease seat count
+                alert(`Registration successful! Seats left: ${availableSeats}`);
+                document.getElementById("eventInfo").innerText = 
+                    `Event: ${eventName}\nDate: ${eventDate}\nAvailable Seats: ${availableSeats}`;
+            } else {
+                alert("Sorry, no more seats available.");
+            }
+        }
+    </script>
+</body>
+</html>

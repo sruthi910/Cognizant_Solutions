@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event Handling - Community Portal</title>
+</head>
+<body>
+  <h1>Community Events</h1>
+
+  <!-- Filters and Search -->
+  <label for="categoryFilter">Filter by Category:</label>
+  <select id="categoryFilter">
+    <option value="All">All</option>
+    <option value="Music">Music</option>
+    <option value="Art">Art</option>
+    <option value="Education">Education</option>
+  </select>
+
+  <br><br>
+  <input type="text" id="searchInput" placeholder="Search by event name" />
+
+  <div id="eventsContainer"></div>
+
+  <script>
+    const events = [
+      { name: "Music Night", category: "Music", seats: 3 },
+      { name: "Art Workshop", category: "Art", seats: 2 },
+      { name: "Tech Talk", category: "Education", seats: 0 },
+      { name: "Coding Bootcamp", category: "Education", seats: 4 }
+    ];
+
+    const container = document.querySelector("#eventsContainer");
+    const categoryFilter = document.querySelector("#categoryFilter");
+    const searchInput = document.querySelector("#searchInput");
+
+    function renderEvents(filteredEvents) {
+      container.innerHTML = "";
+      filteredEvents.forEach((event, index) => {
+        const card = document.createElement("div");
+        card.style.border = "1px solid #ccc";
+        card.style.margin = "10px";
+        card.style.padding = "10px";
+
+        const title = document.createElement("h3");
+        title.textContent = event.name;
+
+        const category = document.createElement("p");
+        category.textContent = `Category: ${event.category}`;
+
+        const seats = document.createElement("p");
+        seats.innerHTML = `Seats: <span id="seats-${index}">${event.seats}</span>`;
+
+        const registerBtn = document.createElement("button");
+        registerBtn.textContent = "Register";
+        registerBtn.onclick = () => {
+          if (event.seats > 0) {
+            event.seats--;
+            document.getElementById(`seats-${index}`).textContent = event.seats;
+          } else {
+            alert("No seats available!");
+          }
+        };
+
+        card.appendChild(title);
+        card.appendChild(category);
+        card.appendChild(seats);
+        card.appendChild(registerBtn);
+        container.appendChild(card);
+      });
+    }
+
+    // Filter by category
+    categoryFilter.onchange = () => {
+      const selected = categoryFilter.value;
+      const filtered = selected === "All"
+        ? events
+        : events.filter(event => event.category === selected);
+      renderEvents(filtered);
+    };
+
+    // Search by name using keydown
+    searchInput.addEventListener("keydown", () => {
+      const query = searchInput.value.toLowerCase();
+      const filtered = events.filter(event =>
+        event.name.toLowerCase().includes(query)
+      );
+      renderEvents(filtered);
+    });
+
+    // Initial render
+    renderEvents(events);
+  </script>
+</body>
+</html>

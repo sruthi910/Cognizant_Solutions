@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Styled Events Table</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+
+    th, td {
+      border: 1px solid #dee2e6;
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #0d6efd;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+
+    tr:hover {
+      background-color: #e2e6ea;
+    }
+  </style>
+</head>
+<body class="container mt-5">
+
+  <h2 class="text-center">Upcoming Events</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Event Name</th>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Tech Conference</td>
+        <td>June 15, 2025</td>
+        <td>New York</td>
+        <td>Scheduled</td>
+      </tr>
+      <tr>
+        <td>Design Expo</td>
+        <td>July 10, 2025</td>
+        <td>San Francisco</td>
+        <td>Planned</td>
+      </tr>
+      <tr>
+        <td>AI Summit</td>
+        <td>August 5, 2025</td>
+        <td>Chicago</td>
+        <td>Confirmed</td>
+      </tr>
+      <tr>
+        <td>Startup Pitch Day</td>
+        <td>September 1, 2025</td>
+        <td>Los Angeles</td>
+        <td>Open</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>
+

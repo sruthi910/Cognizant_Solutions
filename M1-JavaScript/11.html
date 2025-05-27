@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event Registration Form</title>
+  <style>
+    form {
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 2px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 6px;
+      margin-top: 4px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <h1>Register for an Event</h1>
+
+  <form id="registrationForm" novalidate>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" />
+    <div id="nameError" class="error"></div>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" />
+    <div id="emailError" class="error"></div>
+
+    <label for="eventSelect">Select Event:</label>
+    <select id="eventSelect" name="eventSelect">
+      <option value="">-- Choose an event --</option>
+      <option value="Music Night">Music Night</option>
+      <option value="Art Workshop">Art Workshop</option>
+      <option value="Tech Talk">Tech Talk</option>
+    </select>
+    <div id="eventError" class="error"></div>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("registrationForm");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault(); // prevent form from submitting
+
+      // Clear previous errors
+      document.getElementById("nameError").textContent = "";
+      document.getElementById("emailError").textContent = "";
+      document.getElementById("eventError").textContent = "";
+
+      const { name, email, eventSelect } = form.elements;
+
+      let valid = true;
+
+      // Validate Name (not empty)
+      if (!name.value.trim()) {
+        document.getElementById("nameError").textContent = "Please enter your name.";
+        valid = false;
+      }
+
+      // Validate Email (simple regex)
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email.value.trim()) {
+        document.getElementById("emailError").textContent = "Please enter your email.";
+        valid = false;
+      } else if (!emailPattern.test(email.value)) {
+        document.getElementById("emailError").textContent = "Please enter a valid email.";
+        valid = false;
+      }
+
+      // Validate event selection
+      if (!eventSelect.value) {
+        document.getElementById("eventError").textContent = "Please select an event.";
+        valid = false;
+      }
+
+      if (valid) {
+        alert(`Thank you, ${name.value}! You registered for ${eventSelect.value}.`);
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>

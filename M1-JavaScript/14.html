@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>jQuery Example - Community Portal</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .event-card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 8px 0;
+      display: none; /* start hidden */
+    }
+    #message {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Community Events</h1>
+
+  <button id="showEventsBtn">Show Events</button>
+  <button id="hideEventsBtn">Hide Events</button>
+
+  <div id="eventsContainer">
+    <div class="event-card">Music Night</div>
+    <div class="event-card">Art Workshop</div>
+    <div class="event-card">Tech Talk</div>
+  </div>
+
+  <button id="registerBtn">Register for Music Night</button>
+
+  <div id="message"></div>
+
+  <script>
+    // jQuery click event handler
+    $('#registerBtn').click(function () {
+      $('#message').text("Register button clicked! Processing registration...");
+      // Simulate registration delay
+      setTimeout(() => {
+        $('#message').text("Successfully registered for Music Night!").fadeIn();
+      }, 1000);
+    });
+
+    // Show events with fadeIn
+    $('#showEventsBtn').click(function () {
+      $('.event-card').fadeIn();
+    });
+
+    // Hide events with fadeOut
+    $('#hideEventsBtn').click(function () {
+      $('.event-card').fadeOut();
+    });
+  </script>
+
+  <hr />
+  <h2>Note on JS Frameworks</h2>
+  <p>
+    One key benefit of moving to modern frameworks like React or Vue is <strong>component-based architecture</strong>, which helps build reusable, maintainable UI components and manage complex state efficiently.
+  </p>
+</body>
+</html>

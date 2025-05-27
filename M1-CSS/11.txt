@@ -1,0 +1,59 @@
+1. Open Chrome DevTools
+Open your website in Chrome.
+
+Right-click anywhere on the page and select Inspect, or press Ctrl + Shift + I (Windows/Linux) or Cmd + Option + I (Mac).
+
+2. Use Device Toolbar to Simulate Different Screens
+Click the Toggle device toolbar button (phone/tablet icon) in the top-left corner of DevTools or press Ctrl + Shift + M.
+
+Select different devices from the dropdown (e.g., iPhone, iPad) or enter custom screen sizes.
+
+Rotate screen to test both portrait and landscape modes.
+
+Observe how your layout adjusts, and look for breaking points.
+
+3. Inspect Applied Styles
+In DevTools, select an element by clicking the arrow icon (top-left in DevTools) and then clicking on the page element.
+
+In the Styles panel on the right, you can see all CSS rules applied to that element.
+
+You can toggle, edit, add, or remove CSS properties live to see how changes affect the layout immediately.
+
+4. Test Media Queries
+Resize the viewport in the device toolbar.
+
+Check if your media queries activate/deactivate properly by modifying CSS live.
+
+Use the Computed tab to confirm if expected properties are applied.
+
+5. Network Tab to Check External CSS Loading
+Go to the Network tab in DevTools.
+
+Reload the page (Ctrl + R or Cmd + R).
+
+Filter by CSS files.
+
+Check if your external CSS files load successfully (status 200).
+
+If a CSS file is missing or has errors, it will show 404 or other errors here.
+
+You can click on the CSS file name to view its content.
+
+6. Use VS Code for Editing & Debugging
+Open your project folder in VS Code.
+
+Use the Live Server extension to run your webpage locally.
+
+As you edit your CSS or HTML, the browser reloads to show changes.
+
+Use VS Code's Problems tab and linters (like stylelint for CSS) to catch syntax errors.
+
+Use built-in Debug Console and Breakpoints (mainly for JS, but helpful if you have scripts affecting layout).
+
+Bonus Tips:
+Use Chrome Lighthouse (in DevTools > Audits tab) to get automated performance and accessibility reports.
+
+Use CSS Outline debugging: temporarily add outline: 1px solid red; to elements to see box boundaries.
+
+Check Flexbox/Grid debugging tools in Chrome DevTools for layout debugging.
+

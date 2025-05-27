@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Event Promo Video</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 10px;
+      text-align: center;
+    }
+    #videoMessage {
+      margin-top: 10px;
+      font-weight: bold;
+      color: green;
+    }
+    form {
+      margin-top: 30px;
+      text-align: left;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 8px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 15px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Event Promo Video</h2>
+
+  <video id="promoVideo" width="100%" controls oncanplay="videoReady()">
+    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <div id="videoMessage"></div>
+
+  <form id="feedbackForm">
+    <label for="feedback">Leave your feedback:</label>
+    <textarea id="feedback" name="feedback" rows="4" placeholder="Write your thoughts here..."></textarea>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    let formSubmitted = false;
+
+    function videoReady() {
+      const msg = document.getElementById('videoMessage');
+      msg.textContent = "Video ready to play";
+    }
+
+    const form = document.getElementById('feedbackForm');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      formSubmitted = true;
+      alert('Thank you for your feedback!');
+      form.reset();
+    });
+
+    window.onbeforeunload = function(e) {
+      if (!formSubmitted && form.feedback.value.trim() !== '') {
+        // Most browsers show a default message ignoring custom text for security
+        return "You have unsaved changes. Are you sure you want to leave?";
+      }
+    };
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Operations - Community Portal</title>
+</head>
+<body>
+    <h1>Community Events</h1>
+    <div id="eventsList"></div>
+
+    <script>
+        // Event list
+        let events = [];
+
+        // Closure to track total registrations by category
+        function createRegistrationTracker() {
+            const totals = {};
+            return function register(category) {
+                totals[category] = (totals[category] || 0) + 1;
+                console.log(`Total registrations for ${category}: ${totals[category]}`);
+            };
+        }
+
+        const trackRegistration = createRegistrationTracker();
+
+        // Function to add an event
+        function addEvent(name, date, seats, category) {
+            events.push({ name, date, seats, category });
+        }
+
+        // Function to register a user for an event
+        function registerUser(index) {
+            try {
+                const event = events[index];
+                if (event.seats > 0) {
+                    event.seats--;
+                    alert(`Registered for ${event.name}. Remaining seats: ${event.seats}`);
+                    document.getElementById(`seats-${index}`).innerText = event.seats;
+                    trackRegistration(event.category); // Track registration by category
+                } else {
+                    throw new Error("No seats available");
+                }
+            } catch (err) {
+                alert("Error: " + err.message);
+            }
+        }
+
+        // Higher-order function to filter events
+        function filterEvents(callback) {
+            return events.filter(callback);
+        }
+
+        // Predefined filter by category
+        function filterEventsByCategory(category) {
+            return filterEvents(event => event.category === category);
+        }
+
+        // Display events
+        function displayEvents(list) {
+            const container = document.getElementById("eventsList");
+            container.innerHTML = "";
+            list.forEach((event, index) => {
+                const div = document.createElement("div");
+                div.innerHTML = `
+                    <h3>${event.name}</h3>
+                    <p>Date: ${event.date}</p>
+                    <p>Category: ${event.category}</p>
+                    <p>Seats: <span id="seats-${index}">${event.seats}</span></p>
+                    <button onclick="registerUser(${index})">Register</button>
+                    <hr>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Sample events
+        addEvent("Yoga Camp", "2025-06-20", 5, "Health");
+        addEvent("Art Workshop", "2025-06-25", 3, "Art");
+        addEvent("Coding Bootcamp", "2025-07-01", 4, "Education");
+
+        // Display all events initially
+        displayEvents(events);
+
+        // Example: Filter by category "Art"
+        console.log("Filtered by Art:", filterEventsByCategory("Art"));
+    </script>
+</body>
+</html>

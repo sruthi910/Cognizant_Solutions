@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Box Model & Layout</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .eventCard {
+      border: 2px solid #0d6efd;
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #f8f9fa;
+    }
+
+    .form-control:focus {
+      outline: 2px solid #198754;
+      box-shadow: none;
+    }
+
+    .hidden-box {
+      background-color: #ffc107;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    .visibility-hidden {
+      visibility: hidden;
+    }
+
+    .display-none {
+      display: none;
+    }
+  </style>
+</head>
+<body class="container mt-5">
+
+  <h2 class="mb-4">Event Cards with Box Model</h2>
+
+  <div class="eventCard">
+    <h4>Startup Meetup</h4>
+    <p>Join innovators and entrepreneurs for networking and idea sharing.</p>
+  </div>
+
+  <div class="eventCard">
+    <h4>Developer Conference</h4>
+    <p>Learn the latest in tech and development from industry leaders.</p>
+  </div>
+
+  <h2 class="mt-5 mb-3">Form with Outline on Focus</h2>
+  <form>
+    <div class="mb-3">
+      <label for="name" class="form-label">Full Name:</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter your name">
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address:</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter your email">
+    </div>
+  </form>
+
+  <h2 class="mt-5">Visibility vs Display</h2>
+
+  <div class="hidden-box visibility-hidden">This is hidden using <code>visibility: hidden</code> (space reserved)</div>
+  <div class="hidden-box display-none">This is hidden using <code>display: none</code> (space removed)</div>
+
+</body>
+</html>

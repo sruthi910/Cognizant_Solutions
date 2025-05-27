@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DOM Manipulation - Community Portal</title>
+</head>
+<body>
+  <h1>Upcoming Events</h1>
+  <div id="eventsContainer"></div>
+
+  <script>
+    // Sample event data
+    const events = [
+      { name: "Music Night", category: "Music", seats: 3 },
+      { name: "Art Workshop", category: "Art", seats: 2 },
+      { name: "Tech Talk", category: "Education", seats: 0 }
+    ];
+
+    const container = document.querySelector("#eventsContainer");
+
+    // Function to render all event cards
+    function renderEvents() {
+      container.innerHTML = ""; // Clear existing content
+
+      events.forEach((event, index) => {
+        const card = document.createElement("div");
+        card.style.border = "1px solid gray";
+        card.style.padding = "10px";
+        card.style.margin = "10px";
+
+        const title = document.createElement("h3");
+        title.textContent = event.name;
+
+        const category = document.createElement("p");
+        category.textContent = `Category: ${event.category}`;
+
+        const seats = document.createElement("p");
+        seats.innerHTML = `Seats: <span id="seats-${index}">${event.seats}</span>`;
+
+        const registerBtn = document.createElement("button");
+        registerBtn.textContent = "Register";
+        registerBtn.onclick = () => {
+          if (events[index].seats > 0) {
+            events[index].seats--;
+            document.querySelector(`#seats-${index}`).textContent = events[index].seats;
+          } else {
+            alert("No seats available!");
+          }
+        };
+
+        const cancelBtn = document.createElement("button");
+        cancelBtn.textContent = "Cancel";
+        cancelBtn.style.marginLeft = "10px";
+        cancelBtn.onclick = () => {
+          events[index].seats++;
+          document.querySelector(`#seats-${index}`).textContent = events[index].seats;
+        };
+
+        // Append elements to card
+        card.appendChild(title);
+        card.appendChild(category);
+        card.appendChild(seats);
+        card.appendChild(registerBtn);
+        card.appendChild(cancelBtn);
+
+        // Append card to container
+        container.appendChild(card);
+      });
+    }
+
+    // Initial render
+    renderEvents();
+  </script>
+</body>
+</html>

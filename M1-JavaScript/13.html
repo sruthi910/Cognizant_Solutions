@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <title>Debugging & Testing Registration</title>
+</head>
+<body>
+  <h1>Register for an Event</h1>
+
+  <form id="registrationForm" novalidate>
+    <label>Name: <input type="text" name="name" /></label><br />
+    <label>Email: <input type="email" name="email" /></label><br />
+    <label>Event:
+      <select name="eventSelect">
+        <option value="">-- Choose --</option>
+        <option value="Music Night">Music Night</option>
+        <option value="Art Workshop">Art Workshop</option>
+        <option value="Tech Talk">Tech Talk</option>
+      </select>
+    </label><br />
+    <button type="submit">Register</button>
+  </form>
+
+  <div id="message"></div>
+
+  <script>
+    const form = document.getElementById("registrationForm");
+    const messageDiv = document.getElementById("message");
+
+    // Debug: Log at script load
+    console.log("Script loaded, ready to handle form submission");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      console.log("Form submit event triggered");
+
+      const { name, email, eventSelect } = form.elements;
+
+      console.log("Form values:", {
+        name: name.value,
+        email: email.value,
+        event: eventSelect.value,
+      });
+
+      if (!name.value || !email.value || !eventSelect.value) {
+        messageDiv.textContent = "All fields are required.";
+        console.warn("Validation failed: missing fields");
+        return;
+      }
+
+      // Create payload
+      const payload = {
+        name: name.value,
+        email: email.value,
+        event: eventSelect.value,
+      };
+
+      console.log("Sending payload to server:", payload);
+
+      try {
+        // Use debugger statement to pause execution here for inspection
+        debugger;
+
+        // Mock fetch request simulation
+        const response = await fakeFetch(payload);
+        console.log("Fetch response received:", response);
+
+        if (response.success) {
+          messageDiv.textContent = "Registration successful!";
+          console.info("User registered successfully");
+        } else {
+          throw new Error("Server responded with failure");
+        }
+      } catch (error) {
+        messageDiv.textContent = "Registration failed: " + error.message;
+        console.error("Error during registration:", error);
+      }
+    });
+
+    // Fake fetch function simulating async call
+    function fakeFetch(data) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({ success: true, data });
+        }, 1000);
+      });
+    }
+  </script>
+</body>
+</html>

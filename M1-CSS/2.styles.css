@@ -1,0 +1,39 @@
+/* ---------------------------------------- */
+/* Styles for Buttons                       */
+/* ---------------------------------------- */
+
+/* Style for main CTA button */
+.cta-button {
+  background-color: #007BFF; /* Bootstrap primary blue */
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for main CTA button */
+.cta-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Style for secondary button */
+.secondary-button {
+  background-color: #6c757d; /* Bootstrap secondary gray */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+/* Disabled button style */
+.button-disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  opacity: 0.7;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Array Methods - Community Portal</title>
+</head>
+<body>
+    <h1>Community Events</h1>
+    <div id="eventCards"></div>
+
+    <script>
+        // Initial events array
+        let events = [
+            { name: "Live Band", category: "Music" },
+            { name: "JavaScript Basics", category: "Education" },
+            { name: "Painting Class", category: "Art" }
+        ];
+
+        // Add a new event using .push()
+        events.push({ name: "DJ Night", category: "Music" });
+        events.push({ name: "Workshop on Baking", category: "Cooking" });
+
+        // Filter to show only music events
+        const musicEvents = events.filter(event => event.category === "Music");
+
+        // Map to format display cards
+        const formattedCards = events.map(event => {
+            return `
+                <div style="border: 1px solid #ccc; padding: 10px; margin: 10px;">
+                    <h3>${event.name}</h3>
+                    <p>Category: ${event.category}</p>
+                </div>
+            `;
+        });
+
+        // Display all formatted cards
+        document.getElementById("eventCards").innerHTML = formattedCards.join("");
+
+        // Log filtered music events
+        console.log("Music Events:", musicEvents);
+    </script>
+</body>
+</html>
